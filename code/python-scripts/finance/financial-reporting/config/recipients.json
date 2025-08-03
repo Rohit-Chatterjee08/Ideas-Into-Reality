@@ -1,0 +1,28 @@
+{
+  "recipients": [
+    "finance@company.com",
+    "ceo@company.com",
+    "cfo@company.com",
+    "finance-team@company.com"
+  ],
+  "cc": [
+    "reports-archive@company.com"
+  ],
+  "distribution_groups": {
+    "executive": [
+      "ceo@company.com",
+      "cfo@company.com",
+      "coo@company.com"
+    ],
+    "finance_team": [
+      "finance-team@company.com",
+      "accounting@company.com"
+    ],
+    "department_heads": [
+      "sales-director@company.com",
+      "marketing-director@company.com",
+      "operations-director@company.com",
+      "hr-director@company.com"
+    ]
+  }
+}

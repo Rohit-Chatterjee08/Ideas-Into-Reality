@@ -1,0 +1,378 @@
+{
+  "name": "Fraud Alert Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "fraud-alert",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "fraud-alert"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.is_fraud }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "2",
+      "name": "Is Fraud?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.priority }}",
+              "operation": "equal",
+              "value2": "high"
+            }
+          ]
+        }
+      },
+      "id": "3",
+      "name": "High Priority?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        650,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "fraud-alerts@company.com",
+        "toEmail": "fraud-team@company.com",
+        "subject": "🚨 HIGH PRIORITY FRAUD ALERT: Transaction {{ $json.transaction_id }}",
+        "text": "=A high priority fraud alert has been detected:\n\nAlert ID: {{ $json.alert_id }}\nTransaction ID: {{ $json.transaction_id }}\nUser ID: {{ $json.user_id }}\nAmount: ${{ $json.amount }}\nMerchant: {{ $json.merchant }}\nFraud Score: {{ $json.fraud_score }}\nConfidence: {{ $json.confidence }}\n\nTop Factors:\n{% for factor, value in $json.top_factors %}\n- {{ factor }}: {{ value }}\n{% endfor %}\n\nPlease investigate immediately.\n\nAccess the fraud management system at: https://fraud.company.com/alert/{{ $json.alert_id }}"
+      },
+      "id": "4",
+      "name": "Send Urgent Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        850,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "channel": "C01234ABCDEF",
+        "text": "🚨 *HIGH PRIORITY FRAUD ALERT*\n\nTransaction ID: {{ $json.transaction_id }}\nAmount: ${{ $json.amount }}\nFraud Score: {{ $json.fraud_score }}\n\n<https://fraud.company.com/alert/{{ $json.alert_id }}|View Alert>"
+      },
+      "id": "5",
+      "name": "Send Slack Alert",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://fraud.company.com/api/cases",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "alert_id",
+              "value": "={{ $json.alert_id }}"
+            },
+            {
+              "name": "transaction_id",
+              "value": "={{ $json.transaction_id }}"
+            },
+            {
+              "name": "user_id",
+              "value": "={{ $json.user_id }}"
+            },
+            {
+              "name": "amount",
+              "value": "={{ $json.amount }}"
+            },
+            {
+              "name": "merchant",
+              "value": "={{ $json.merchant }}"
+            },
+            {
+              "name": "fraud_score",
+              "value": "={{ $json.fraud_score }}"
+            },
+            {
+              "name": "priority",
+              "value": "={{ $json.priority }}"
+            },
+            {
+              "name": "status",
+              "value": "new"
+            }
+          ]
+        }
+      },
+      "id": "6",
+      "name": "Create Fraud Case",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        650,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "sheetId": "1abc123def456",
+        "range": "A:J",
+        "options": {
+          "valueInputMode": "USER_ENTERED"
+        },
+        "valueInputMode": "RAW",
+        "dataMode": "autoMapInputData"
+      },
+      "id": "7",
+      "name": "Log to Spreadsheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 2,
+      "position": [
+        850,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "fraud-alerts@company.com",
+        "toEmail": "fraud-team@company.com",
+        "subject": "Fraud Alert: Transaction {{ $json.transaction_id }}",
+        "text": "=A fraud alert has been detected:\n\nAlert ID: {{ $json.alert_id }}\nTransaction ID: {{ $json.transaction_id }}\nUser ID: {{ $json.user_id }}\nAmount: ${{ $json.amount }}\nMerchant: {{ $json.merchant }}\nFraud Score: {{ $json.fraud_score }}\nConfidence: {{ $json.confidence }}\n\nAccess the fraud management system at: https://fraud.company.com/alert/{{ $json.alert_id }}"
+      },
+      "id": "8",
+      "name": "Send Standard Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        850,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "message": "Received fraud alert for transaction {{ $json.transaction_id }} with score {{ $json.fraud_score }}",
+        "level": "info"
+      },
+      "id": "9",
+      "name": "Log Alert",
+      "type": "n8n-nodes-base.log",
+      "typeVersion": 1,
+      "position": [
+        450,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.company.com/v1/notifications/sms",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "phone",
+              "value": "+15551234567"
+            },
+            {
+              "name": "message",
+              "value": "=URGENT: High priority fraud alert detected for transaction {{ $json.transaction_id }}. Amount: ${{ $json.amount }}. Please check email for details."
+            }
+          ]
+        }
+      },
+      "id": "10",
+      "name": "Send SMS Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.company.com/v1/users/{{ $json.user_id }}/risk-score",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "risk_score",
+              "value": "={{ $json.fraud_score }}"
+            },
+            {
+              "name": "alert_id",
+              "value": "={{ $json.alert_id }}"
+            },
+            {
+              "name": "timestamp",
+              "value": "={{ $json.timestamp }}"
+            }
+          ]
+        }
+      },
+      "id": "11",
+      "name": "Update User Risk Score",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Add additional context to the alert\nconst item = items[0].json;\n\n// Calculate risk level based on fraud score\nlet riskLevel = 'Medium';\nif (item.fraud_score > 0.8) {\n  riskLevel = 'Critical';\n} else if (item.fraud_score > 0.6) {\n  riskLevel = 'High';\n} else if (item.fraud_score < 0.4) {\n  riskLevel = 'Low';\n}\n\n// Format amount with commas\nconst formattedAmount = new Intl.NumberFormat('en-US', {\n  style: 'currency',\n  currency: 'USD'\n}).format(item.amount);\n\n// Format timestamp\nconst timestamp = new Date(item.timestamp);\nconst formattedDate = timestamp.toLocaleDateString('en-US', {\n  year: 'numeric',\n  month: 'short',\n  day: 'numeric'\n});\nconst formattedTime = timestamp.toLocaleTimeString('en-US');\n\n// Add enriched data\nitem.risk_level = riskLevel;\nitem.formatted_amount = formattedAmount;\nitem.formatted_date = formattedDate;\nitem.formatted_time = formattedTime;\n\n// Add action links\nitem.investigation_url = `https://fraud.company.com/alert/${item.alert_id}`;\nitem.user_profile_url = `https://fraud.company.com/user/${item.user_id}`;\n\nreturn {json: item};"
+      },
+      "id": "12",
+      "name": "Enrich Alert Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        700
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Is Fraud?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Log Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Fraud?": {
+      "main": [
+        [
+          {
+            "node": "High Priority?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "High Priority?": {
+      "main": [
+        [
+          {
+            "node": "Send Urgent Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Slack Alert",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enrich Alert Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Urgent Email": {
+      "main": [
+        [
+          {
+            "node": "Send SMS Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Alert": {
+      "main": [
+        [
+          {
+            "node": "Create Fraud Case",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Fraud Case": {
+      "main": [
+        [
+          {
+            "node": "Log to Spreadsheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log to Spreadsheet": {
+      "main": [
+        [
+          {
+            "node": "Update User Risk Score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enrich Alert Data": {
+      "main": [
+        [
+          {
+            "node": "Send Standard Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

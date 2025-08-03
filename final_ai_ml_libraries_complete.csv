@@ -1,0 +1,80 @@
+Library,Description,Use Case,Example
+numpy,Fundamental package for numerical computations in Python.,Numerical Computation,"Create arrays, perform matrix operations."
+scipy,Library for scientific and technical computing.,Scientific Computation,"Use optimization, integration, and signal processing tools."
+pandas,Data manipulation and analysis library.,Data Manipulation,Handle tabular data using DataFrames.
+matplotlib,"Comprehensive library for static, animated, and interactive visualizations.",Data Visualization,"Create line, bar, scatter plots."
+seaborn,Statistical data visualization built on top of matplotlib.,Statistical Visualization,"Draw heatmaps, violin plots, KDE plots."
+scikit-learn,Simple and efficient tools for predictive data analysis.,General Machine Learning,"Train classification, regression, clustering models."
+xgboost,Optimized gradient boosting library designed to be highly efficient.,Gradient Boosting,Train powerful tree-based models for tabular data.
+lightgbm,"Fast, distributed, high-performance gradient boosting framework.",Efficient Boosting,"Train fast, memory-efficient models for classification."
+catboost,"Fast, scalable, high-performance gradient boosting on decision trees.",Categorical Boosting,Handle categorical features natively.
+mlxtend,Extension and helper modules for scikit-learn and ML tasks.,Model Stacking,Build pipelines and ensemble models.
+imbalanced-learn,Handle imbalanced datasets in machine learning.,Imbalanced Classification,"Resample datasets using SMOTE, Tomek Links."
+tensorflow,End-to-end open-source platform for machine learning and deep learning.,Deep Learning,Build and train neural networks on large datasets.
+keras,"High-level neural networks API, running on top of TensorFlow.",Neural Networks,Quickly prototype deep learning models.
+pytorch,Deep learning platform that provides maximum flexibility and speed.,Deep Learning,Dynamic computational graph for building models.
+fastai,Simplifies training fast and accurate neural nets using PyTorch.,Simplified DL,Train image and text models quickly.
+torchvision,"Datasets, transforms, and models for computer vision using PyTorch.",Computer Vision,Use pretrained vision models and transforms.
+torchaudio,Audio processing tools for PyTorch.,Audio Processing,Transform and load audio data.
+tensorflow_hub,Repository of pre-trained TensorFlow models.,Pretrained Models,Load pretrained models for transfer learning.
+onnx,Open format for AI model interoperability.,Model Interoperability,Convert models between frameworks.
+onnxruntime,"Cross-platform, high performance scoring engine for ONNX models.",Model Deployment,Run ONNX models on multiple platforms.
+nltk,Natural Language Toolkit for working with human language data.,Text Preprocessing,"Tokenize, stem, POS tag text."
+spacy,Industrial-strength NLP library in Python.,Industrial NLP,"Entity recognition, dependency parsing."
+transformers,State-of-the-art Natural Language Processing for Pytorch and TensorFlow by Hugging Face.,Pretrained NLP,"Use BERT, GPT, T5 for NLP tasks."
+gensim,Topic modeling and document similarity analysis.,Topic Modeling,Build LDA topic models on text.
+textblob,Simple API for NLP tasks.,Simple NLP,"Sentiment analysis, noun phrase extraction."
+sumy,Text summarization module.,Text Summarization,Generate extractive text summaries.
+opencv-python,Open Source Computer Vision Library for real-time image processing.,Computer Vision,Process real-time video streams and images.
+scikit-image,Collection of algorithms for image processing.,Image Processing,"Apply filters, transformations to images."
+imageio,Library for reading and writing image data.,Image I/O,Read and write image/video formats.
+albumentations,Fast and flexible image augmentation library.,Data Augmentation,Apply transforms to training images.
+plotly,Interactive graphing library.,Interactive Plots,Build dynamic charts and graphs.
+bokeh,Interactive visualizations for modern web browsers.,Web Dashboards,Embed interactive visualizations in web apps.
+dash,Framework for building dashboards using Plotly for Python.,Production Dashboards,Deploy ML models with a GUI.
+streamlit,Tool to create custom web apps for ML and data science projects.,ML Web Apps,Build and share apps with a few lines of Python.
+gradio,Create UIs for machine learning models.,ML UI,Create browser-based UI for ML models.
+auto-sklearn,Automated machine learning with scikit-learn.,AutoML,Automate feature engineering and model selection.
+h2o,Open-source platform for AI with AutoML capabilities.,AutoML,Train models with AutoML and interpret them.
+tpot,Automated machine learning using genetic programming.,Genetic AutoML,Evolve best models with genetic programming.
+autokeras,AutoML library for deep learning.,AutoDL,Auto-tune deep learning models.
+shap,Explain output of machine learning models.,Model Explainability,Explain predictions with Shapley values.
+lime,Explains predictions of any machine learning classifier.,Model Interpretability,Interpret black-box classifiers.
+eli5,Visualization and debugging for ML models.,Debugging ML,Understand and debug model predictions.
+mlflow,"Manage the ML lifecycle, including experimentation and deployment.",MLOps,"Track experiments, manage models."
+dvc,Data Version Control system for machine learning projects.,ML Version Control,"Track data, code, and models."
+optuna,Hyperparameter optimization framework.,Hyperparameter Tuning,Optimize models with efficient search.
+ray,Framework for building scalable AI applications.,Distributed AI,Scale training with parallel processing.
+bentoml,Model serving and deployment framework.,Model Serving,Package models for production APIs.
+joblib,Serialization and parallelism for Python.,Model Persistence,Save sklearn models efficiently.
+pickle,Standard Python object serialization library.,Serialization,Serialize any Python object.
+stable-baselines3,Reliable implementations of reinforcement learning algorithms.,Reinforcement Learning,Train RL agents in Gym environments.
+gym,Toolkit for developing and comparing RL algorithms.,RL Environments,Use or create simulation environments.
+ray[rllib],Scalable RL library.,Scalable RL,Train large RL agents on clusters.
+pyarrow,Python bindings for Apache Arrow.,Columnar Data,Read/write Parquet and Arrow formats.
+dask,Parallel computing with task scheduling.,Parallel Computing,Scale NumPy/Pandas to big data.
+modin,Speed up Pandas using Ray or Dask.,Fast Pandas,Speed up pandas with multi-core processing.
+vaex,Out-of-core DataFrames for large datasets.,Big DataFrames,Work with large datasets out-of-core.
+sklearn-pandas,Bridge between pandas DataFrames and scikit-learn.,Feature Engineering,Use DataFrameMapper to apply transformations before training.
+feature-engine,Feature engineering for ML pipelines.,Feature Selection/Engineering,"Handle missing data, encoding, discretization."
+dtreeviz,Visualize decision trees.,Model Visualization,Plot scikit-learn decision tree with feature splits.
+yellowbrick,Visual analysis and diagnostic tools for ML.,Model Visualization,"Plot classification reports, residuals, etc."
+sweetviz,Automated EDA library.,EDA,Generate full HTML reports comparing datasets.
+pdpbox,Partial dependence plots for ML models.,Model Interpretation,Visualize how a feature affects predictions.
+skops,Portable and secure serialization for scikit-learn models.,Model Serialization,Export sklearn model safely for deployment.
+flaml,Lightweight AutoML library.,AutoML,Train ML models with fast tuning and low computational cost.
+deepchecks,Test ML models & data for issues.,Testing & Validation,Run suites to validate model behavior and data quality.
+evidently,Monitor and analyze data/model drift.,Model Monitoring,Detect drift in model predictions over time.
+pycaret,Low-code ML library for training and deployment.,AutoML,Build models with just a few lines of code.
+creme,Online machine learning for streaming data.,Online Learning,Train models incrementally on data streams.
+river,Successor to creme for online learning.,Streaming ML,Process and predict on real-time data one sample at a time.
+snorkel,Weak supervision for labeling data.,Data Labeling,Create and apply labeling functions instead of manual labeling.
+trulens,Evaluate LLMs and generative models.,LLM Evaluation,Track and debug hallucinations in GPT responses.
+deepspeed,Deep learning optimization library by Microsoft.,Large Model Training,Train GPT-style models with less memory.
+accelerate,Hugging Face training accelerator.,Multi-GPU Training,Simplify training across multiple GPUs/TPUs.
+keras-tuner,Hyperparameter tuning for Keras models.,AutoML,"Tune number of layers, neurons, learning rate."
+neuralprophet,Time-series forecasting based on Facebook Prophet + Neural Nets.,Time Series Forecasting,Forecast future sales or metrics.
+orbit-ml,Bayesian time series forecasting library.,Probabilistic Forecasting,Forecast uncertainty-aware metrics.
+skforecast,Time series forecasting with scikit-learn regressors.,Time Series,Use xgboost to predict future values.
+autogluon,AutoML framework by AWS.,AutoML,Train tabular/NLP/CV models with a single call.
+mediapipe,Framework by Google for CV tasks.,Pose/Face Detection,Detect hand gestures or face mesh in video streams.
