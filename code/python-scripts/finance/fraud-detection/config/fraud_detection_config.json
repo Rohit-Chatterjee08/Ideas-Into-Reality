@@ -1,0 +1,38 @@
+{
+  "models": {
+    "random_forest": "models/random_forest_model.pkl",
+    "xgboost": "models/xgboost_model.pkl",
+    "isolation_forest": "models/isolation_forest_model.pkl"
+  },
+  "history_days": 30,
+  "webhook_url": "http://localhost:5678/webhook/fraud-alert",
+  "alert_log": "logs/fraud_alerts.log",
+  "thresholds": {
+    "default": 0.7,
+    "high_value": 0.5,
+    "new_user": 0.6
+  },
+  "high_value_threshold": 1000,
+  "new_user_days": 30,
+  "email": {
+    "enabled": false,
+    "smtp_server": "smtp.company.com",
+    "smtp_port": 587,
+    "username": "fraud-alerts@company.com",
+    "password": "your_password_here",
+    "from_address": "fraud-alerts@company.com",
+    "to_address": "fraud-team@company.com",
+    "high_priority_to": "fraud-urgent@company.com"
+  },
+  "api": {
+    "host": "0.0.0.0",
+    "port": 5000,
+    "debug": false,
+    "rate_limit": 100
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/fraud_detection.log",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  }
+}

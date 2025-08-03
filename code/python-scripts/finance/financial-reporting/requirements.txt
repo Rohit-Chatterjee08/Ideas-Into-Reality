@@ -1,0 +1,33 @@
+# Core data processing
+pandas==2.1.0
+numpy==1.24.3
+sqlalchemy==2.0.20
+
+# Visualization
+matplotlib==3.7.2
+seaborn==0.12.2
+plotly==5.16.1
+
+# Excel handling
+openpyxl==3.1.2
+xlrd==2.0.1
+
+# PDF generation
+reportlab==4.0.4
+jinja2==3.1.2
+
+# API and HTTP
+requests==2.31.0
+
+# Environment and configuration
+python-dotenv==1.0.0
+
+# Optional: Database connectors
+# pymysql==1.1.0
+# psycopg2-binary==2.9.7
+# pyodbc==4.0.39
+
+# Optional: Cloud storage
+# boto3==1.28.38
+# google-cloud-storage==2.10.0
+# azure-storage-blob==12.17.0

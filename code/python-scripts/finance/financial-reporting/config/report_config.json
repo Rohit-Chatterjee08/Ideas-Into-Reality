@@ -1,0 +1,43 @@
+{
+  "report_title": "Monthly Financial Performance Report",
+  "data_sources": [
+    {
+      "type": "csv",
+      "name": "transactions",
+      "file_path": "data/transactions.csv"
+    },
+    {
+      "type": "csv",
+      "name": "expenses",
+      "file_path": "data/expenses.csv"
+    }
+  ],
+  "analyses": [
+    {
+      "name": "Revenue",
+      "type": "time_series",
+      "data_source": "transactions",
+      "date_column": "transaction_date",
+      "value_column": "amount"
+    },
+    {
+      "name": "Expenses",
+      "type": "category_analysis",
+      "data_source": "expenses",
+      "category_column": "category",
+      "value_column": "amount"
+    },
+    {
+      "name": "Unusual Transactions",
+      "type": "anomaly_detection",
+      "data_source": "transactions",
+      "value_column": "amount",
+      "threshold": 2.5
+    }
+  ],
+  "create_dashboard": true,
+  "main_data_source": "transactions",
+  "dashboard_date_column": "transaction_date",
+  "dashboard_value_column": "amount",
+  "dashboard_category_column": "category"
+}
